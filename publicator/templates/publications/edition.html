@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}
+  Публикации в категории {{ category.title }}
+{% endblock %}
+{% block content %}
+  <h1 class="text-center">Публикации в издании - {{ edition.title }}</h1>
+  <p class="col-6 offset-3 mb-5 lead text-center">Категория: {{ category.title }}</p>
+  <p class="col-6 offset-3 mb-5 lead text-center">{{ edition.description }}</p>
+  {% for publication in page_obj %}
+    <article class="mb-5">  
+      {% include "includes/publications_card.html" %}
+    </article>   
+  {% endfor %}
+  {% include "includes/paginator.html" %}
+{% endblock %}
