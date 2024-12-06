@@ -3,7 +3,7 @@
   {{ publication.title }} |{{ publication.pub_date|date:"d E Y" }}
 {% endblock %}
 {% block content %}
-  <div class="col d-flex justify-content-center">
+<div class="col d-flex justify-content-center" xmlns="http://www.w3.org/1999/html">
     <div class="card" style="width: 40rem;">
       <div class="card-body">
         {% if publication.image %}
@@ -36,6 +36,10 @@
             в категории {% include "includes/category_link.html" %}
           </small>
         </h6>
+        <h6>Тэги: </h6>
+        {% for tag in publication.key_words.all %}
+              {{ tag.name }}
+        {% endfor %}
         <h6>Аннотация: </h6>
         <p class="card-text">{{ publication.annotation|linebreaksbr }}</p>
         <h6>Текст: </h6>
