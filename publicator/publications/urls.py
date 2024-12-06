@@ -95,4 +95,9 @@ urlpatterns = [
         views.edit_profile,
         name='edit_profile'
     ),
+    path(
+        'new_tag/new/',
+        views.TagsCreate.as_view(),
+        name='create_tag'
+    ),
 ]

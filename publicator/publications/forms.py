@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from django import forms
-from publications.models import Publication, Author, Edition, Category
+from publications.models import Publication, Author, Edition, Category, Tags
 
 User = get_user_model()
 
@@ -91,3 +91,8 @@ class ApplicationForm(forms.ModelForm):
             'text': forms.Textarea
         }
         model = Publication
+
+class TagsForm(forms.ModelForm):
+    class Meta:
+        fields = '__all__'
+        model = Tags

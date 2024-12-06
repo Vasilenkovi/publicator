@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Publication, Category, User, Edition, Author
+from .models import Publication, Category, User, Edition, Author, Tags
 from django.utils import timezone
 from django.core.paginator import Paginator
 from django.views import View
-from publications.forms import UserEditForm, PublicationForm, EditionForm, CategoryForm, ApplicationForm
+from publications.forms import UserEditForm, PublicationForm, EditionForm, CategoryForm, ApplicationForm, TagsForm
 from django.views.generic.edit import ModelFormMixin, FormView
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
@@ -259,7 +259,7 @@ class CategoryFormView(ModelFormMixin, FormView):
     success_url = reverse_lazy("publications:index")
 
     def get(self, request, *args, **kwargs):
-        if "publication_id" in self.kwargs:
+        if "category_id" in self.kwargs:
             self.object = get_object_or_404(Category, pk=self.kwargs["category_id"])
         else:
             self.object = None
@@ -272,6 +272,26 @@ class CategoryFormView(ModelFormMixin, FormView):
             self.object = None
         return super().post(request, *args, **kwargs)
 
+
+class TagsCreate(ModelFormMixin, FormView):
+    model = Tags
+    form_class = TagsForm
+    template_name = "publications/create_edit.html"
+    success_url = reverse_lazy("publications:index")
+
+    def get(self, request, *args, **kwargs):
+        if "tags_id" in self.kwargs:
+            self.object = get_object_or_404(Category, pk=self.kwargs["tag_id"])
+        else:
+            self.object = None
+        return super().get(request, *args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if "tags_id" in self.kwargs:
+            self.object = get_object_or_404(Category, pk=self.kwargs["tag_id"])
+        else:
+            self.object = None
+        return super().post(request, *args, **kwargs)
 
 class EditionFormView(ModelFormMixin, FormView):
     model = Edition

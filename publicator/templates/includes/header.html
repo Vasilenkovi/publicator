@@ -29,6 +29,8 @@
                     href="{% url 'publications:create_edition' %}">Создать издание</a></button>
               <button type="button" class="btn btn-outline-primary"><a class="text-decoration-none text-reset"
                     href="{% url 'publications:create_publication' %}">Создать публикацию</a></button>
+               <button type="button" class="btn btn-outline-primary"><a class="text-decoration-none text-reset"
+                    href="{% url 'publications:create_tag' %}">Создать Тег</a></button>
               {% endif %}
               <button type="button" class="btn btn-outline-primary"><a class="text-decoration-none text-reset"
                   href="{% url 'publications:profile' user.username %}">{{ user.username }}</a></button>
