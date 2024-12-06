@@ -9,6 +9,9 @@ class Author(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     affiliation = models.CharField(max_length=256, verbose_name="Аффилиация ")
 
+    def __str__(self):
+        return f'{self.user.first_name} {self.user.last_name}'
+
 
 class Base(models.Model):
     is_published = models.BooleanField(
@@ -28,6 +31,7 @@ class Base(models.Model):
     )
 
     class Meta:
+        ordering = '-pub_date'
         abstract = True
 
 
@@ -40,6 +44,9 @@ class Category(Base):
                                       "разрешены символы латиницы, "
                                       "цифры, дефис и подчёркивание."
                             )
+
+    def __str__(self):
+        return self.title
 
     class Meta:
         verbose_name = 'категория'
@@ -69,6 +76,9 @@ class Edition(Base):
     )
     edition_file = models.FileField(upload_to="archive")
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = 'Издание'
         verbose_name_plural = 'Издание'
@@ -76,6 +86,9 @@ class Edition(Base):
 
 class Tags(models.Model):
     name = models.CharField(max_length=256, verbose_name="Ключевое слово")
+
+    def __str__(self):
+        return self.name
 
 
 class Publication(Base):
@@ -102,7 +115,9 @@ class Publication(Base):
     article = models.FileField(upload_to="archive")
     application = models.BooleanField(default=False, verbose_name="В статусе заявки(True) или опубликовано(False)")
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = 'публикация'
         verbose_name_plural = 'Публикации'
-

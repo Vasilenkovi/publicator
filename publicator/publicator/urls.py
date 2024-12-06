@@ -16,22 +16,26 @@ Including another URLconf
 from django.contrib import admin
 from django.views.generic.edit import CreateView
 from django.urls import include, path, reverse_lazy
-from publications.forms import UserForm
+from publications.forms import AuthorForm
 from django.conf.urls.static import static
 from django.conf import settings
 
+handler404 = "pages.views.page_not_found"
+handler500 = "pages.views.page_internal_server_error"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('library/', include('publications.urls')),
-    path('', include('pages.urls')),
+    path('', include('publications.urls')),
+    path('pages/', include('pages.urls')),
     path(
         'auth/registration/',
         CreateView.as_view(
             template_name='registration/registration_form.html',
-            form_class=UserForm,
+            form_class=AuthorForm,
             success_url=reverse_lazy('publications:index'),
         ),
         name='registration',
     ),
     path('auth/', include('django.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

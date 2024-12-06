@@ -5,7 +5,18 @@
 {% block content %}
   <h1 class="text-center">Публикации в издании - {{ edition.title }}</h1>
   <p class="col-6 offset-3 mb-5 lead text-center">Категория: {{ category.title }}</p>
-  <p class="col-6 offset-3 mb-5 lead text-center">{{ edition.description }}</p>
+  <p>Описание: {{ edition.description }}</p>
+  {% if user.is_superuser %}
+    <div class="mb-2">
+      <a class="btn btn-sm text-muted" href="{% url 'publications:edit_edition' edition.id %}" role="button">
+        Отредактировать издание
+      </a>
+      <a class="btn btn-sm text-muted" href="{% url 'publications:delete_edition' edition.id %}" role="button">
+        Удалить издание
+      </a>
+      <a class="btn btn-sm text-muted" href="{% url 'publications:edition_download' edition.pk %}"> Скачать издание </a>
+    </div>
+  {% endif %}
   {% for publication in page_obj %}
     <article class="mb-5">  
       {% include "includes/publications_card.html" %}

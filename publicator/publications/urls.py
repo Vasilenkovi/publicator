@@ -37,12 +37,62 @@ urlpatterns = [
     ),
     path(
         'edit_publication/<int:publication_id>/',
-        views.AdminPanel.as_view(),
+        views.PublicationFormView.as_view(),
         name='edit_publication'
     ),
     path(
-        'edit_publication/<int:publication_id>/',
-        views.AdminPanel.as_view(),
+        'edir_category/<int:category_id>/',
+        views.CategoryFormView.as_view(),
+        name='edir_category'
+    ),
+    path(
+        'edit_edition/<int:edition_id>/',
+        views.EditionFormView.as_view(),
+        name='edit_edition'
+    ),
+    path(
+        'edit_publication/new/',
+        views.PublicationFormView.as_view(),
+        name='create_publication'
+    ),
+    path(
+        'edir_category/new/',
+        views.CategoryFormView.as_view(),
+        name='create_category'
+    ),
+    path(
+        'edit_edition/new/',
+        views.EditionFormView.as_view(),
+        name='create_edition'
+    ),
+    path(
+        'edition_download/<int:edition_id>/',
+        views.editionDowload,
+        name='edition_download'
+    ),
+    path(
+        'publication_download/<int:publication_id>/',
+        views.publicationsDownload,
+        name='publication_download'
+    ),
+    path(
+        'delete_category/<int:category_id>/',
+        views.deleteCategroy,
+        name='delete_category'
+    ),
+    path(
+        'delete_edition/<int:edition_id>/',
+        views.deleteEdition,
+        name='delete_edition'
+    ),
+    path(
+        'delete_publication/<int:publication_id>/',
+        views.deletePublication,
         name='delete_publication'
-    )
+    ),
+    path(
+        'edit_profile/',
+        views.edit_profile,
+        name='edit_profile'
+    ),
 ]

@@ -5,6 +5,16 @@
 {% block content %}
   <h1 class="text-center">Издания в категории - {{ category.title }}</h1>
   <p class="col-6 offset-3 mb-5 lead text-center">{{ category.description }}</p>
+  {% if user.is_superuser %}
+    <div class="mb-2">
+      <a class="btn btn-sm text-muted" href="{% url 'publications:edit_category' category.id %}" role="button">
+        Отредактировать категорию
+      </a>
+      <a class="btn btn-sm text-muted" href="{% url 'publications:delete_category' category.id %}" role="button">
+        Удалить категорию
+      </a>
+    </div>
+  {% endif %}
   {% for edition in page_obj %}
     <article class="mb-5">  
       {% include "includes/edition_card.html" %}

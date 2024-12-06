@@ -12,6 +12,7 @@
           </a>
         {% endif %}
         <h5 class="card-title">{{ publication.title }}</h5>
+          <a href="{% url 'publications:publication_download' publication.pk %}"> Скачать публикацию </a>
         <h6 class="card-subtitle mb-2 text-muted">
           <small>
             {% if not publication.is_published %}
@@ -22,14 +23,17 @@
               <p class="text-danger">Выбранная категория снята с публикации админом</p>
             {% endif %}
             {{ publication.pub_date|date:"d E Y, H:i" }}<br>
-            От авторов
-            {% for author in publications.authors %}
+            Авторы:
+             {% for author in publication.authors.all %}
               <a class="text-muted" href="{% url 'publications:profile' author.user.username %}">
-              @{{ author.user.username }}</a>
+              @{{ author.user.username }}sdfa</a>
             {% endfor %}
             в категории {% include "includes/category_link.html" %}
           </small>
         </h6>
+        <h6>Аннотация: </h6>
+        <p class="card-text">{{ publication.annotation|linebreaksbr }}</p>
+        <h6>Текст: </h6>
         <p class="card-text">{{ publication.text|linebreaksbr }}</p>
         {% if user.is_superuser %}
           <div class="mb-2">

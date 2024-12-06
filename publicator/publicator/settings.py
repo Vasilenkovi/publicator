@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_bootstrap5',
-    'publications',
-    'pages',
+    'publications.apps.PublicationsConfig',
+    'pages.apps.PagesConfig',
 ]
 STATICFILES_DIRS = [BASE_DIR / 'static']
 MIDDLEWARE = [
@@ -102,11 +102,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 LOGIN_REDIRECT_URL = "publications:index"
-
+LOGIN_URL = 'login'
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ru-RU'
 
 TIME_ZONE = 'UTC'
 
@@ -126,3 +126,9 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_FAILURE_VIEW = 'pages.views.page_csrf_forbidden'
+
+EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
+
+EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
