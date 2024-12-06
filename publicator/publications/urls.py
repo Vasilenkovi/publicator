@@ -43,7 +43,7 @@ urlpatterns = [
     path(
         'edir_category/<int:category_id>/',
         views.CategoryFormView.as_view(),
-        name='edir_category'
+        name='edit_category'
     ),
     path(
         'edit_edition/<int:edition_id>/',
