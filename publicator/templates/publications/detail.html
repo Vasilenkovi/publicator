@@ -26,7 +26,12 @@
             Авторы:
              {% for author in publication.authors.all %}
               <a class="text-muted" href="{% url 'publications:profile' author.user.username %}">
-              @{{ author.user.username }}sdfa</a>
+              @{{ author.user.username }}</a>
+            {% endfor %}
+            Ссылки:
+            {% for publink in publication.link.all %}
+            <a href="{% url 'publications:publication_detail' publink.edition.category.slug publink.edition.slug  publink.id %}" class="card-link">
+              @{{ publink.title }}</a>
             {% endfor %}
             в категории {% include "includes/category_link.html" %}
           </small>

@@ -151,13 +151,15 @@ def publication_detail(request, category_slug, edition_slug, post_id):
         )
         publication = get_object_or_404(
             Publication,
-            pub_date__lte=dt_now,
             edition=edition,
             pk=post_id,
-            application=False,
         )
-    authors = publication.authors.all()
-    print(authors)
+        user = User.objects.get(pk=request.user.pk)
+        if  Author.objects.get(user=user) not in publication.authors.all():
+            publication = publication.filter(
+                pub_date__lte=dt_now,
+                application=False,
+            )
     context = {
         'publication': publication,
         'category': category,
